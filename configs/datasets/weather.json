@@ -1,0 +1,159 @@
+{
+  "table_name": "weather",
+  "format": "csv",
+  "schema_version": 1,
+  "primary_key": ["timestamp"],
+  "columns": [
+    {
+      "name": "year",
+      "type": "int",
+      "nullable": false,
+      "keep_column": true
+    },
+    {
+      "name": "month",
+      "type": "int",
+      "nullable": false,
+      "keep_column": true
+    },
+    {
+      "name": "day",
+      "type": "int",
+      "nullable": false,
+      "keep_column": true
+    },
+    {
+      "name": "hour",
+      "type": "int",
+      "nullable": false,
+      "keep_column": true
+    },
+    {
+      "name": "temp",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "temp_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "rhum",
+      "type": "int",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "rhum_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "prcp",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "prcp_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "snwd",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "snwd_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "wdir",
+      "type": "int",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "wdir_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "wspd",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "wspd_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "wpgt",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "wpgt_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "pres",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "pres_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "cldc",
+      "type": "int",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "cldc_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "coco",
+      "type": "int",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "coco_source",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    }
+  ],
+  "extra_functions": [
+    "separate_time_to_timestamp"
+  ],
+  "quality_rules": [
+    {"rule": "not_null", "column": "timestamp"},
+    {"rule": "between", "column": "rhum", "minimum": 0, "maximum": 100}
+  ]
+}

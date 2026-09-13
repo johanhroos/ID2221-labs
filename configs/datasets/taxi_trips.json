@@ -1,0 +1,150 @@
+{
+  "table_name": "taxi_trip_data",
+  "format": "parquet",
+  "schema_version": 1,
+  "primary_key": [
+    "vendor_id", "tpep_pickup_datetime", "tpep_dropoff_datetime",
+    "pulocation_id", "dolocation_id", "trip_distance", "total_amount"
+  ],
+  "generated_key": {
+    "name": "likely_trip_id",
+    "columns": [
+      "vendor_id", "tpep_pickup_datetime", "tpep_dropoff_datetime",
+      "pulocation_id", "dolocation_id", "trip_distance"
+    ]
+  },
+  "columns": [
+    {
+      "name": "VendorID",
+      "type": "int",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "tpep_pickup_datetime",
+      "type": "timestamp",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "tpep_dropoff_datetime",
+      "type": "timestamp",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "passenger_count",
+      "type": "long",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "trip_distance",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "RatecodeID",
+      "type": "long",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "store_and_fwd_flag",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "PULocationID",
+      "type": "int",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "DOLocationID",
+      "type": "int",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "payment_type",
+      "type": "long",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "fare_amount",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "extra",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "mta_tax",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "tip_amount",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "tolls_amount",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "improvement_surcharge",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "total_amount",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "congestion_surcharge",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "Airport_fee",
+      "type": "double",
+      "nullable": true,
+      "keep_column": true
+    }
+  ],
+  "extra_functions": [
+    "add_negative_fare_flag",
+    "add_likely_reimbursement_flag"
+  ],
+  "quality_rules": [
+    {"rule": "not_null", "column": "tpep_pickup_datetime"},
+    {"rule": "not_null", "column": "tpep_dropoff_datetime"},
+    {"rule": "finite", "column": "trip_distance"},
+    {"rule": "finite", "column": "fare_amount"},
+    {"rule": "finite", "column": "total_amount"},
+    {"rule": "minimum", "column": "passenger_count", "value": 0},
+    {"rule": "minimum", "column": "trip_distance", "value": 0},
+    {
+      "rule": "after_or_equal",
+      "column": "tpep_dropoff_datetime",
+      "other_column": "tpep_pickup_datetime"
+    }
+  ]
+}

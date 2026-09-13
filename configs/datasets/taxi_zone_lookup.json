@@ -1,0 +1,36 @@
+{
+  "table_name": "taxi_zone_lookup",
+  "format": "csv",
+  "schema_version": 1,
+  "primary_key": ["location_id"],
+  "columns": [
+    {
+      "name": "LocationID",
+      "type": "int",
+      "nullable": false,
+      "keep_column": true
+    },
+    {
+      "name": "Borough",
+      "type": "string",
+      "nullable": false,
+      "keep_column": true
+    },
+    {
+      "name": "Zone",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    },
+    {
+      "name": "service_zone",
+      "type": "string",
+      "nullable": true,
+      "keep_column": true
+    }
+  ],
+  "extra_functions": [
+    "add_county_from_borough"
+  ],
+  "quality_rules": []
+}

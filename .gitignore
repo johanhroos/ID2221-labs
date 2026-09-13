@@ -1,0 +1,6 @@
+data/hourly_88101_2024.csv
+spark_warehouse/*
+delta_tables/*
+*__pycache__*
+logs/
+benchmark_results/
