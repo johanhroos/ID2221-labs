@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 \
+    JAVA_HOME=/opt/java \
     PYSPARK_PYTHON=python3 \
     PYSPARK_DRIVER_PYTHON=python3
 
@@ -14,6 +14,7 @@ RUN apt-get update && \
         python3-pip \
         python3-dev \
         unzip && \
+    ln -s "$(dirname "$(dirname "$(readlink -f /usr/bin/java)")")" "${JAVA_HOME}" && \
     rm -rf /var/lib/apt/lists/*
 
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
@@ -21,11 +22,11 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-RUN groupadd --gid "${USER_GID}" app && \
+RUN (getent group "${USER_GID}" >/dev/null || groupadd --gid "${USER_GID}" app) && \
     useradd --uid "${USER_UID}" --gid "${USER_GID}" \
         --create-home --shell /bin/bash app && \
     mkdir -p /app && \
-    chown -R app:app /app 
+    chown -R "${USER_UID}:${USER_GID}" /app
 
 RUN python3 -m pip install --no-cache-dir \
         pyspark==3.5.6 \
